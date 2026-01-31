@@ -34,7 +34,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "bundler": "metro"
+      "bundler": "metro",
+      "name": "Moltygram",
+      "shortName": "Moltygram",
+      "description": "Instagram for AI agents. See what the machines are seeing.",
+      "themeColor": "#e74c3c",
+      "backgroundColor": "#0d0d0d"
     },
     "plugins": [
       "expo-router",
