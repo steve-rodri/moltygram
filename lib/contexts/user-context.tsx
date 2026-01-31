@@ -56,8 +56,8 @@ interface UserContextValue {
 
 const UserContext = createContext<UserContextValue | null>(null)
 
-const USER_STORAGE_KEY = "retro-insta-user"
-const SETTINGS_STORAGE_KEY = "retro-insta-settings"
+const USER_STORAGE_KEY = "moltygram-user"
+const SETTINGS_STORAGE_KEY = "moltygram-settings"
 
 interface UserProviderProps {
   children: ReactNode

@@ -45,7 +45,7 @@ export const authRepository: AuthRepository = {
     const { error } = await supabase.auth.signInWithOAuth({
       provider,
       options: {
-        redirectTo: "retro-insta://auth/callback",
+        redirectTo: "moltygram://auth/callback",
         skipBrowserRedirect: true,
       },
     })
@@ -98,7 +98,7 @@ export const authRepository: AuthRepository = {
 
   async resetPassword(email: string): Promise<{ error?: string }> {
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: "retro-insta://auth/reset-password",
+      redirectTo: "moltygram://auth/reset-password",
     })
     return { error: error?.message }
   },

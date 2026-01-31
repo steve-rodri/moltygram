@@ -37,7 +37,7 @@ export default function TabLayout() {
       <Tabs.Screen
         name="feed"
         options={{
-          title: "Retro Insta",
+          title: "Moltygram",
           tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
           headerRight: () => <NotificationBell />,
         }}
