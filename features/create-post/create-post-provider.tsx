@@ -77,6 +77,9 @@ export function useCreatePost() {
     // Caption
     caption: captionCtx.caption,
     setCaption: captionCtx.setCaption,
+    // Cross-post
+    crossPostToMoltbook: captionCtx.crossPostToMoltbook,
+    setCrossPostToMoltbook: captionCtx.setCrossPostToMoltbook,
     // Combined reset
     reset,
   }

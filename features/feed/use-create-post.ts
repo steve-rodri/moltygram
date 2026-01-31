@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query"
 
 import { useAuth } from "@lib/contexts/auth-context"
 
+import { moltbookClient } from "../../services/repositories/moltbook"
 import {
   postRepository,
   storageRepository,
@@ -15,6 +16,7 @@ interface CreatePostParams {
   images: string[]
   caption?: string
   aestheticBannerUrl?: string
+  crossPostToMoltbook?: boolean
 }
 
 export function useCreatePost() {
@@ -26,6 +28,7 @@ export function useCreatePost() {
       images,
       caption,
       aestheticBannerUrl,
+      crossPostToMoltbook,
     }: CreatePostParams) => {
       if (!session) throw new Error("Not authenticated")
 
@@ -51,11 +54,30 @@ export function useCreatePost() {
         uploadedBannerUrl = result.url
       }
 
-      return postRepository.createPost(session.user.id, {
+      const post = await postRepository.createPost(session.user.id, {
         images: uploadedUrls,
         caption,
         aestheticBannerUrl: uploadedBannerUrl,
       })
+
+      // Cross-post to Moltbook if enabled
+      if (crossPostToMoltbook && uploadedUrls.length > 0) {
+        try {
+          const moltbookContent = caption
+            ? `${caption}\n\n📸 Posted on Moltygram`
+            : "📸 New photo on Moltygram"
+
+          await moltbookClient.createPost(moltbookContent, uploadedUrls)
+        } catch (error) {
+          // Don't fail the whole post if Moltbook cross-post fails
+          Sentry.captureException(error, {
+            tags: { feature: "crossPostToMoltbook" },
+            extra: { postId: post.id },
+          })
+        }
+      }
+
+      return post
     },
     onMutate: async ({ images, caption, aestheticBannerUrl }) => {
       if (!session || !profile) return

@@ -13,6 +13,7 @@ interface SubmitPostParams {
   selectedImages: string[]
   caption: string
   aestheticImage: string | null
+  crossPostToMoltbook: boolean
   reset: () => void
 }
 
@@ -20,6 +21,7 @@ export function usePostSubmission({
   selectedImages,
   caption,
   aestheticImage,
+  crossPostToMoltbook,
   reset,
 }: SubmitPostParams) {
   const router = useRouter()
@@ -47,6 +49,7 @@ export function usePostSubmission({
         images: capturedImages,
         caption: caption || undefined,
         aestheticBannerUrl,
+        crossPostToMoltbook,
       },
       {
         onSuccess: () => {

@@ -54,6 +54,7 @@ export const PostEditorContent = forwardRef<
       selectedImages: ctx.selectedImages,
       caption: ctx.caption,
       aestheticImage: ctx.aestheticImage,
+      crossPostToMoltbook: ctx.crossPostToMoltbook,
       reset: ctx.reset,
     })
 
@@ -231,6 +232,8 @@ export const PostEditorContent = forwardRef<
           <CaptionPanel
             caption={ctx.caption}
             onCaptionChange={ctx.setCaption}
+            crossPostToMoltbook={ctx.crossPostToMoltbook}
+            onCrossPostChange={ctx.setCrossPostToMoltbook}
             colors={colors}
           />
         </ScrollView>
