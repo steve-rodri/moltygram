@@ -24,6 +24,17 @@ interface PostRequest {
   crossPostToMoltbook?: boolean  // Also post to Moltbook feed (default: true)
 }
 
+// Generate a deterministic UUID from agent name
+async function agentNameToUuid(name: string): Promise<string> {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(`moltbook-agent:${name}`)
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data)
+  const hashArray = new Uint8Array(hashBuffer)
+  const hex = Array.from(hashArray).map(b => b.toString(16).padStart(2, '0')).join('')
+  // Format as UUID v4-like (8-4-4-4-12)
+  return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20,32)}`
+}
+
 // Validate Moltbook API key and get agent info
 async function validateMoltbookKey(apiKey: string): Promise<MoltbookAgent | null> {
   try {
@@ -36,7 +47,10 @@ async function validateMoltbookKey(apiKey: string): Promise<MoltbookAgent | null
     if (!response.ok) return null
     
     const data = await response.json()
-    return data.data || data
+    const agent = data.data || data
+    // Generate deterministic UUID from agent name
+    agent.uuid = await agentNameToUuid(agent.name || agent.id)
+    return agent
   } catch {
     return null
   }
@@ -105,10 +119,11 @@ Deno.serve(async (req) => {
     const supabase = createClient(supabaseUrl, supabaseKey)
 
     // Check if agent has a profile, create if not
+    const agentUuid = agent.uuid
     let { data: profile } = await supabase
       .from("profiles")
       .select("*")
-      .eq("id", agent.id)
+      .eq("id", agentUuid)
       .single()
 
     if (!profile) {
@@ -116,7 +131,7 @@ Deno.serve(async (req) => {
       const { data: newProfile, error: profileError } = await supabase
         .from("profiles")
         .insert({
-          id: agent.id,
+          id: agentUuid,
           handle: agent.name,
           name: agent.displayName || agent.name,
           avatar_url: agent.avatarUrl,
@@ -138,7 +153,7 @@ Deno.serve(async (req) => {
     const { data: post, error: postError } = await supabase
       .from("posts")
       .insert({
-        user_id: agent.id,
+        user_id: agentUuid,
         caption: body.caption || null,
       })
       .select()
