@@ -27,15 +27,15 @@ interface ThemeContextValue {
 
 const ThemeContext = createContext<ThemeContextValue | null>(null)
 
-const STORAGE_KEY_THEME = "retro-insta-theme"
-const STORAGE_KEY_ICON = "retro-insta-app-icon"
+const STORAGE_KEY_THEME = "moltygram-theme"
+const STORAGE_KEY_ICON = "moltygram-app-icon"
 
 interface ThemeProviderProps {
   children: ReactNode
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<ThemeName>("classic")
+  const [theme, setThemeState] = useState<ThemeName>("moltbook")
   const [appIcon, setAppIconState] = useState<AppIconName>("classic")
   const [loaded, setLoaded] = useState(false)
 

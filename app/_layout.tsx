@@ -75,7 +75,7 @@ function AuthGate({ children }: { children: React.ReactNode }) {
 
 function RootLayoutNav() {
   const { theme } = useUniwind()
-  const isDark = theme === "dark"
+  const isDark = theme === "dark" || theme === "moltbook"
   useOTAUpdates()
   usePushNotifications()
 

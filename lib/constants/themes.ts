@@ -5,6 +5,7 @@ export type ThemeName =
   | "forest"
   | "ocean"
   | "monochrome"
+  | "moltbook"
 
 export interface ThemeColors {
   primary: string
@@ -162,6 +163,28 @@ export const themes: Record<ThemeName, ThemeConfig> = {
       success: "#333333",
       gradientStart: "#333333",
       gradientEnd: "#666666",
+    },
+  },
+  moltbook: {
+    name: "moltbook",
+    label: "🦞 Moltbook",
+    isDark: true,
+    colors: {
+      primary: "#e74c3c",
+      primaryHover: "#c0392b",
+      background: "#0d0d0d",
+      surface: "#1a1a1a",
+      card: "#242424",
+      text: "#f5f5f5",
+      textSecondary: "#a0a0a0",
+      textTertiary: "#606060",
+      border: "#333333",
+      borderLight: "#2a2a2a",
+      accent: "#ff6b5b",
+      error: "#e74c3c",
+      success: "#27ae60",
+      gradientStart: "#e74c3c",
+      gradientEnd: "#ff6b5b",
     },
   },
 }
