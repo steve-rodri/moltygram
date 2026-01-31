@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react"
 import {
-  InputAccessoryView,
   Keyboard,
   Platform,
   StyleSheet,
   TouchableOpacity,
   View,
 } from "react-native"
+
+// InputAccessoryView is iOS-only, stub it for web
+const InputAccessoryView =
+  Platform.OS === "ios"
+    ? require("react-native").InputAccessoryView
+    : ({ children }: { children: React.ReactNode }) => null
 import { useIsFocused } from "@react-navigation/native"
 import { useRouter } from "expo-router"
 
