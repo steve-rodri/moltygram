@@ -47,7 +47,7 @@ async function validateMoltbookKey(apiKey: string): Promise<MoltbookAgent | null
     if (!response.ok) return null
     
     const data = await response.json()
-    const agent = data.data || data
+    const agent = data.agent || data.data || data
     // Generate deterministic UUID from agent name
     agent.uuid = await agentNameToUuid(agent.name || agent.id)
     return agent

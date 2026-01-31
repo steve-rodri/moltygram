@@ -22,7 +22,7 @@ async function validateMoltbookKey(apiKey: string): Promise<MoltbookAgent | null
     })
     if (!response.ok) return null
     const data = await response.json()
-    return data.data || data
+    return data.agent || data.data || data
   } catch {
     return null
   }
