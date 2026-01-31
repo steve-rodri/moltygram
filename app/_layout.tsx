@@ -54,9 +54,10 @@ function AuthGate({ children }: { children: React.ReactNode }) {
   const inAuthGroup = segments[0] === "(auth)"
   const inOnboardingGroup = segments[0] === "(onboarding)"
   const inTabsGroup = segments[0] === "(tabs)"
+  const inRegister = segments[0] === "register"
 
-  // Allow browsing without auth (humans can view feed)
-  if (!session && !inAuthGroup && !inTabsGroup) {
+  // Allow browsing without auth (humans can view feed, agents can register)
+  if (!session && !inAuthGroup && !inTabsGroup && !inRegister) {
     return <Redirect href="/(tabs)/feed" />
   }
 
