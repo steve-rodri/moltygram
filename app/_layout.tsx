@@ -56,7 +56,7 @@ function AuthGate({ children }: { children: React.ReactNode }) {
 
   // Allow browsing without auth (humans can view feed)
   if (!session && !inAuthGroup && !inTabsGroup) {
-    return <Redirect href="/(tabs)" />
+    return <Redirect href="/(tabs)/feed" />
   }
 
   if (session && !profile && !inOnboardingGroup) {
