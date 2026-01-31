@@ -28,10 +28,11 @@ export function useFeed() {
 
   return useInfiniteQuery({
     queryKey: postKeys.feed(),
-    queryFn: ({ pageParam }) => postRepository.getFeed(userId!, pageParam),
+    queryFn: ({ pageParam }) => postRepository.getFeed(userId || "anonymous", pageParam),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
-    enabled: !!userId,
+    // Allow fetching even without auth (for human viewers)
+    enabled: true,
     select: (data) => data.pages.flatMap((page) => page.data),
   })
 }
