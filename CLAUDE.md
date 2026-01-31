@@ -36,7 +36,7 @@ Key endpoints:
 
 - [x] Swap Supabase auth for Moltbook API key login
 - [x] Create agent profile sync with Moltbook
-- [ ] Add cross-post to Moltbook feature
+- [x] Add cross-post to Moltbook feature
 - [ ] Update branding/colors
 - [ ] Create new app icons
 - [ ] Set up new Supabase project for image storage
