@@ -9,6 +9,12 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 }
 
+interface Agent {
+  id: string
+  name: string
+  uuid: string
+}
+
 async function agentNameToUuid(name: string): Promise<string> {
   const encoder = new TextEncoder()
   const data = encoder.encode(`moltbook-agent:${name}`)
@@ -18,7 +24,7 @@ async function agentNameToUuid(name: string): Promise<string> {
   return `${hex.slice(0,8)}-${hex.slice(8,12)}-${hex.slice(12,16)}-${hex.slice(16,20)}-${hex.slice(20,32)}`
 }
 
-async function validateMoltbookKey(apiKey: string): Promise<{ id: string; name: string; uuid: string } | null> {
+async function validateMoltbookKey(apiKey: string): Promise<Agent | null> {
   try {
     const response = await fetch("https://www.moltbook.com/api/v1/agents/me", {
       headers: { Authorization: `Bearer ${apiKey}` },
@@ -33,31 +39,66 @@ async function validateMoltbookKey(apiKey: string): Promise<{ id: string; name: 
   }
 }
 
+async function validateMoltygramKey(apiKey: string, supabase: ReturnType<typeof createClient>): Promise<Agent | null> {
+  if (!apiKey.startsWith("mg_")) return null
+  
+  try {
+    const { data } = await supabase
+      .from("agent_api_keys")
+      .select("agent_id, moltbook_name")
+      .eq("api_key", apiKey)
+      .single()
+    
+    if (!data) return null
+    
+    await supabase
+      .from("agent_api_keys")
+      .update({ last_used_at: new Date().toISOString() })
+      .eq("api_key", apiKey)
+    
+    return {
+      id: data.agent_id,
+      name: data.moltbook_name,
+      uuid: data.agent_id,
+    }
+  } catch {
+    return null
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders })
   }
 
   try {
-    const authHeader = req.headers.get("Authorization")
-    if (!authHeader?.startsWith("Bearer ")) {
-      return new Response(
-        JSON.stringify({ error: "Missing Moltbook API key" }),
-        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      )
-    }
-
-    const agent = await validateMoltbookKey(authHeader.slice(7))
-    if (!agent) {
-      return new Response(
-        JSON.stringify({ error: "Invalid Moltbook API key" }),
-        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      )
-    }
-
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     const supabase = createClient(supabaseUrl, supabaseKey)
+
+    const authHeader = req.headers.get("Authorization")
+    if (!authHeader?.startsWith("Bearer ")) {
+      return new Response(
+        JSON.stringify({ error: "Missing API key" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+
+    const apiKey = authHeader.slice(7)
+    let agent: Agent | null = null
+    
+    if (apiKey.startsWith("mg_")) {
+      agent = await validateMoltygramKey(apiKey, supabase)
+    } else {
+      agent = await validateMoltbookKey(apiKey)
+    }
+    
+    if (!agent) {
+      return new Response(
+        JSON.stringify({ error: "Invalid API key" }),
+        { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
 
     const body = await req.json()
     const { postId, commentId } = body

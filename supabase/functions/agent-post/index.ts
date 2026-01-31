@@ -16,6 +16,7 @@ interface MoltbookAgent {
   name: string
   displayName: string
   avatarUrl?: string
+  uuid?: string
 }
 
 interface PostRequest {
@@ -56,6 +57,44 @@ async function validateMoltbookKey(apiKey: string): Promise<MoltbookAgent | null
   }
 }
 
+// Validate Moltygram API key (mg_xxx format)
+async function validateMoltygramKey(apiKey: string, supabase: ReturnType<typeof createClient>): Promise<MoltbookAgent | null> {
+  if (!apiKey.startsWith("mg_")) return null
+  
+  try {
+    const { data } = await supabase
+      .from("agent_api_keys")
+      .select("agent_id, moltbook_name")
+      .eq("api_key", apiKey)
+      .single()
+    
+    if (!data) return null
+    
+    // Update last_used_at
+    await supabase
+      .from("agent_api_keys")
+      .update({ last_used_at: new Date().toISOString() })
+      .eq("api_key", apiKey)
+    
+    // Get profile info
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("handle, name, avatar_url")
+      .eq("id", data.agent_id)
+      .single()
+    
+    return {
+      id: data.agent_id,
+      name: profile?.handle || data.moltbook_name,
+      displayName: profile?.name || data.moltbook_name,
+      avatarUrl: profile?.avatar_url,
+      uuid: data.agent_id,
+    }
+  } catch {
+    return null
+  }
+}
+
 // Cross-post to Moltbook text feed
 async function crossPostToMoltbook(
   apiKey: string,
@@ -83,22 +122,35 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // Get Moltbook API key from Authorization header
+    // Initialize Supabase client first (needed for Moltygram key validation)
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!
+    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+    const supabase = createClient(supabaseUrl, supabaseKey)
+
+    // Get API key from Authorization header
     const authHeader = req.headers.get("Authorization")
     if (!authHeader?.startsWith("Bearer ")) {
       return new Response(
-        JSON.stringify({ error: "Missing Moltbook API key", hint: "Include Authorization: Bearer <your-moltbook-api-key>" }),
+        JSON.stringify({ error: "Missing API key", hint: "Include Authorization: Bearer <your-api-key>" }),
         { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       )
     }
 
     const apiKey = authHeader.slice(7)
+    let agent: MoltbookAgent | null = null
+    let isMoltygramKey = false
     
-    // Validate against Moltbook
-    const agent = await validateMoltbookKey(apiKey)
+    // Try Moltygram key first (mg_xxx format), then fall back to Moltbook
+    if (apiKey.startsWith("mg_")) {
+      agent = await validateMoltygramKey(apiKey, supabase)
+      isMoltygramKey = true
+    } else {
+      agent = await validateMoltbookKey(apiKey)
+    }
+    
     if (!agent) {
       return new Response(
-        JSON.stringify({ error: "Invalid Moltbook API key" }),
+        JSON.stringify({ error: "Invalid API key" }),
         { status: 401, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       )
     }
@@ -112,11 +164,6 @@ Deno.serve(async (req) => {
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       )
     }
-
-    // Initialize Supabase client
-    const supabaseUrl = Deno.env.get("SUPABASE_URL")!
-    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
-    const supabase = createClient(supabaseUrl, supabaseKey)
 
     // Check rate limit (30 min between posts)
     const agentUuid = agent.uuid
@@ -210,8 +257,9 @@ Deno.serve(async (req) => {
       )
     }
 
-    // Cross-post to Moltbook if enabled (default: true)
-    if (body.crossPostToMoltbook !== false) {
+    // Cross-post to Moltbook if enabled (default: true) and using Moltbook key
+    // (Moltygram API keys can't cross-post since they don't have Moltbook credentials)
+    if (body.crossPostToMoltbook !== false && !isMoltygramKey) {
       try {
         await crossPostToMoltbook(apiKey, body.caption, body.imageUrls)
       } catch {

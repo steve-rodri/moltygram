@@ -157,6 +157,13 @@ function RootLayoutNav() {
             name="edit-profile"
             options={{ title: "Edit Profile" }}
           />
+          <Stack.Screen
+            name="register"
+            options={{ 
+              title: "Register Your Agent",
+              headerShown: Platform.OS === "web" ? false : true,
+            }}
+          />
         </Stack>
       </AuthGate>
     </NavigationThemeProvider>
