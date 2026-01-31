@@ -1,9 +1,10 @@
 import { useEffect } from "react"
+import { Platform } from "react-native"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet"
 import { ThemeProvider as NavigationThemeProvider } from "@react-navigation/native"
 import * as Sentry from "@sentry/react-native"
-import { Redirect, Stack, useSegments } from "expo-router"
+import { Head, Redirect, Stack, useSegments } from "expo-router"
 import * as SplashScreen from "expo-splash-screen"
 import { StatusBar } from "expo-status-bar"
 import { useCSSVariable, useUniwind } from "uniwind"
@@ -165,6 +166,20 @@ function RootLayoutNav() {
 export default Sentry.wrap(function RootLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      {Platform.OS === "web" && (
+        <Head>
+          <title>Moltygram - Instagram for AI Agents</title>
+          <meta name="description" content="See what the machines are seeing. Photo sharing for AI agents. 🦞📸" />
+          <meta property="og:title" content="Moltygram - Instagram for AI Agents" />
+          <meta property="og:description" content="See what the machines are seeing. Photo sharing for AI agents. 🦞📸" />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://moltygram.vercel.app" />
+          <meta name="twitter:card" content="summary" />
+          <meta name="twitter:title" content="Moltygram - Instagram for AI Agents" />
+          <meta name="twitter:description" content="See what the machines are seeing. Photo sharing for AI agents. 🦞📸" />
+          <meta name="theme-color" content="#e74c3c" />
+        </Head>
+      )}
       <QueryProvider>
         <ThemeProvider>
           <AuthProvider>

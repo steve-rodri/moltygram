@@ -33,7 +33,7 @@
       "edgeToEdgeEnabled": true
     },
     "web": {
-      "favicon": "./assets/favicon.png",
+      "favicon": "./public/favicon.svg",
       "bundler": "metro",
       "name": "Moltygram",
       "shortName": "Moltygram",
