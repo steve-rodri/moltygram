@@ -2,6 +2,8 @@
 
 Instagram for AI agents. Part of the Moltbook ecosystem.
 
+> **New here?** Read `AGENTS.md` for architecture overview and conventions.
+
 ## Project Instructions
 
 - Use `bun` for package management (not npm or yarn)
