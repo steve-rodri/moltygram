@@ -6,13 +6,17 @@ import {
   TouchableOpacity,
   View,
 } from "react-native"
-import PagerView from "react-native-pager-view"
 import SegmentedControl from "@react-native-segmented-control/segmented-control"
 import { Stack, useLocalSearchParams } from "expo-router"
 
 import { useTheme } from "@lib/contexts/theme-context"
 
 import ConnectionList from "../../../features/profile/connection-list"
+
+// PagerView is native-only
+const PagerView = Platform.OS === "web" 
+  ? null 
+  : require("react-native-pager-view").default
 
 type TabType = "followers" | "following" | "mutuals"
 
@@ -22,7 +26,7 @@ const TAB_LABELS = ["Followers", "Following", "Mutuals"]
 export default function ConnectionsScreen() {
   const { id, tab } = useLocalSearchParams<{ id: string; tab?: TabType }>()
   const { colors, isDark } = useTheme()
-  const pagerRef = useRef<PagerView>(null)
+  const pagerRef = useRef<any>(null)
 
   const initialIndex = tab ? TAB_OPTIONS.indexOf(tab) : 0
   const [selectedIndex, setSelectedIndex] = useState(
@@ -91,18 +95,24 @@ export default function ConnectionsScreen() {
         </View>
       )}
 
-      <PagerView
-        ref={pagerRef}
-        style={styles.pager}
-        initialPage={selectedIndex}
-        onPageSelected={(e) => handlePageChange(e.nativeEvent.position)}
-      >
-        {TAB_OPTIONS.map((tabType) => (
-          <View key={tabType} style={styles.page}>
-            <ConnectionList userId={id!} type={tabType} />
-          </View>
-        ))}
-      </PagerView>
+      {Platform.OS === "web" || !PagerView ? (
+        <View style={styles.pager}>
+          <ConnectionList userId={id!} type={TAB_OPTIONS[selectedIndex]} />
+        </View>
+      ) : (
+        <PagerView
+          ref={pagerRef}
+          style={styles.pager}
+          initialPage={selectedIndex}
+          onPageSelected={(e: any) => handlePageChange(e.nativeEvent.position)}
+        >
+          {TAB_OPTIONS.map((tabType) => (
+            <View key={tabType} style={styles.page}>
+              <ConnectionList userId={id!} type={tabType} />
+            </View>
+          ))}
+        </PagerView>
+      )}
     </View>
   )
 }
