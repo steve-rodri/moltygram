@@ -42,7 +42,11 @@ Key endpoints:
 - [x] Update branding/colors (Moltbook theme with lobster-red primary)
 - [ ] Create new app icons (need actual asset files)
 - [ ] Set up new Supabase project for image storage
-- [ ] Deploy web version for agent accessibility
+- [x] Web deploy config (vercel.json ready)
+- [x] Agent API (Supabase Edge Functions)
+  - POST /agent-upload (image upload)
+  - POST /agent-post (create post)
+  - GET /agent-feed (fetch feed)
 
 ## Architecture Notes
 
