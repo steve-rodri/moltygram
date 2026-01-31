@@ -1,0 +1,160 @@
+name: Staging Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  cancel_in_progress: true
+  group: ${{ workflow.filename }}-${{ github.ref }}
+
+jobs:
+  # Calculate fingerprint to check if native code changed
+  fingerprint:
+    name: Calculate Fingerprint
+    type: fingerprint
+    environment: preview
+
+  # # Try to find existing Android build with matching fingerprint
+  # android_get_build:
+  #   name: Get Android Build
+  #   needs: [fingerprint]
+  #   type: get-build
+  #   params:
+  #     fingerprint_hash: ${{ needs.fingerprint.outputs.android_fingerprint_hash }}
+  #     platform: android
+  #     profile: stg
+  #   environment: preview
+
+  # # Full Android build if no matching fingerprint (native changes)
+  # android_build:
+  #   name: Build Android
+  #   needs: [android_get_build]
+  #   if: ${{ !needs.android_get_build.outputs.build_id }}
+  #   type: build
+  #   params:
+  #     platform: android
+  #     profile: stg
+  #   environment: preview
+
+  # # Publish update to staging channel if builds exist
+  # android_update:
+  #   name: Publish Android Update to Staging
+  #   needs: [android_get_build]
+  #   if: ${{ needs.android_get_build.outputs.build_id }}
+  #   type: update
+  #   params:
+  #     platform: android
+  #     channel: stg
+  #     message: ${{ github.event.head_commit.message }}
+  #   environment: preview
+
+  # Try to find existing iOS build with matching fingerprint
+  ios_get_build:
+    name: Get iOS Build
+    needs: [fingerprint]
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint.outputs.ios_fingerprint_hash }}
+      platform: ios
+      profile: stg
+    environment: preview
+
+  # Full iOS build if no matching fingerprint (native changes)
+  ios_build:
+    name: Build iOS
+    needs: [ios_get_build]
+    if: ${{ !needs.ios_get_build.outputs.build_id }}
+    type: build
+    params:
+      platform: ios
+      profile: stg
+    environment: preview
+
+  # Publish update to staging channel if builds exist
+  ios_update:
+    name: Publish iOS Update to Staging
+    needs: [ios_get_build]
+    if: ${{ needs.ios_get_build.outputs.build_id }}
+    type: update
+    params:
+      platform: ios
+      channel: stg
+      message: ${{ github.event.head_commit.message }}
+    environment: preview
+
+  # Submit iOS build to TestFlight
+  ios_submit:
+    name: Submit iOS to TestFlight
+    needs: [ios_build]
+    if: ${{ needs.ios_build.outputs.build_id }}
+    type: submit
+    params:
+      build_id: ${{ needs.ios_build.outputs.build_id }}
+      profile: stg
+    environment: preview
+    env:
+      EXPO_DEBUG: "1"
+
+  # notify_slack_android_build:
+  #   name: Notify Slack - Android Build
+  #   needs: [android_build]
+  #   if: ${{ env.SLACK_WEBHOOK_URL }}
+  #   type: slack
+  #   params:
+  #     channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+  #     webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+  #     message: |
+  #       🔨 Android build created for Staging!
+
+  #       *Commit*: ${{ github.event.head_commit.message }}
+  #       *Channel*: stg
+  #       *Platform*: Android
+  #       📲 Install: https://expo.dev/accounts/${{ env.EXPO_ACCOUNT }}/projects/retro-insta/builds/${{ needs.android_build.outputs.build_id }}
+
+  notify_slack_ios_build:
+    name: Notify Slack - iOS Build
+    needs: [ios_build]
+    if: ${{ env.SLACK_WEBHOOK_URL }}
+    type: slack
+    params:
+      channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+      webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+      message: |
+        🔨 iOS build created for Staging!
+
+        *Commit*: ${{ github.event.head_commit.message }}
+        *Channel*: stg
+        *Platform*: iOS
+        📲 Install: https://expo.dev/accounts/${{ env.EXPO_ACCOUNT }}/projects/retro-insta/builds/${{ needs.ios_build.outputs.build_id }}
+
+  # notify_slack_android_update:
+  #   name: Notify Slack - Android Update
+  #   needs: [android_update]
+  #   if: ${{ env.SLACK_WEBHOOK_URL }}
+  #   type: slack
+  #   params:
+  #     channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+  #     webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+  #     message: |
+  #       📦 Android update published to Staging!
+
+  #       *Commit*: ${{ github.event.head_commit.message }}
+  #       *Channel*: stg
+  #       *Platform*: Android
+
+  notify_slack_ios_update:
+    name: Notify Slack - iOS Update
+    needs: [ios_update]
+    if: ${{ env.SLACK_WEBHOOK_URL }}
+    type: slack
+    params:
+      channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+      webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+      message: |
+        📦 iOS update published to Staging!
+
+        *Commit*: ${{ github.event.head_commit.message }}
+        *Channel*: stg
+        *Platform*: iOS

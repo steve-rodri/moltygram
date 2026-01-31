@@ -1,0 +1,1196 @@
+You
+All right. Okay, user logs in and opens app. They see. What screen? Like, what do you want to see on? Oh, is this shit? 
+
+Isabella Iovino
+Hmm, maybe, like... Hmm. It's kind of hard, because I don't want it to be, like, a copycat of Instagram, but I want it to be, like, something along those lines, you know? 
+
+You
+Yeah. 
+
+Isabella Iovino
+So, maybe. Maybe when it opens up, you open up to your profile rather than opening up to like the homepage where it's showing everyone post. 
+
+You
+Uh, okay, so like profile screen. Um. You know? Okay, yeah, let's just let's just do this. lets go with this. So profile screen. What does that look like? 
+
+Isabella Iovino
+Uh, there's going to be a profile photo. 
+
+You
+It's 
+
+Isabella Iovino
+Uh, 
+
+You
+like right 
+
+Isabella Iovino
+let's 
+
+You
+here. 
+
+Isabella Iovino
+make it 
+
+You
+Okay. 
+
+Isabella Iovino
+square. 
+
+You
+I 
+
+Isabella Iovino
+Or should it be Circle? What do you think? 
+
+You
+don't care. Uh, 
+
+Isabella Iovino
+Hmm. 
+
+You
+or like a rounded circle, like, like that. 
+
+Isabella Iovino
+Ooh, what if, what if you can make it customizable? So like someone could choose their profile photo to be like shaped like a star or like a square or 
+
+You
+Could 
+
+Isabella Iovino
+circle. 
+
+You
+do that, yeah. Okay. 
+
+Isabella Iovino
+Um, yeah, it was too square for now. 
+
+You
+Customize. I'm already, I don't know why I take notes on that. It's already been recording. Okay. Um, square for now, it's cool. It's like in the center or like here or like. 
+
+Isabella Iovino
+Hmm. Let's see the right side. 
+
+You
+Like 
+
+Isabella Iovino
+Hmm. 
+
+You
+in here or kind of like in here. You know what I mean? I 
+
+Isabella Iovino
+Man. Because like, I'm not trying to copy Instagram. It's like, 
+
+You
+know. I 
+
+Isabella Iovino
+It's hard 
+
+You
+mean, 
+
+Isabella Iovino
+to come 
+
+You
+it's 
+
+Isabella Iovino
+up 
+
+You
+okay, 
+
+Isabella Iovino
+with 
+
+You
+you 
+
+Isabella Iovino
+something. 
+
+You
+know what it is? It's not that bad to copy because you're just basically reducing features. Like you're taking a lot of stuff that works already. It's fun. 
+
+Isabella Iovino
+Yeah, that's true. Um. Okay, let's keep it like that and then. Maybe the handle could be... Huh. Like underneath it? No. 
+
+You
+Oh, you need like a handle, right? Like because they 
+
+Isabella Iovino
+Yeah. 
+
+You
+have like this and 
+
+Isabella Iovino
+I 
+
+You
+then. 
+
+Isabella Iovino
+want it to be, I want it to be so that, like, you know how Instagram the bio takes up like a 3rd of the screen. 
+
+You
+Let 
+
+Isabella Iovino
+I 
+
+You
+me 
+
+Isabella Iovino
+don't want 
+
+You
+look 
+
+Isabella Iovino
+it 
+
+You
+at 
+
+Isabella Iovino
+to be 
+
+You
+it. 
+
+Isabella Iovino
+that 
+
+You
+Let 
+
+Isabella Iovino
+much. I 
+
+You
+me look 
+
+Isabella Iovino
+want it 
+
+You
+at 
+
+Isabella Iovino
+to 
+
+You
+Instagram. 
+
+Isabella Iovino
+be like very small, so you could see the person's like posts more than that. 
+
+You
+Okay, so Instagram is like the, this is on the left side and then um, Actually, they have like a header with the tag up here. I 
+
+Isabella Iovino
+Yeah. 
+
+You
+mean, just put some elements on the screen real quick, so like we have, uh, just another box here. That's like, And this is the, the, handle. So that's, oops. So that's Um, What 
+
+Isabella Iovino
+Or maybe 
+
+You
+is some? 
+
+Isabella Iovino
+actually 
+
+You
+Okay. 
+
+Isabella Iovino
+the name of the app should go up there. You know, you know how Instagram does that? 
+
+You
+Name of app. Uh. 
+
+Isabella Iovino
+And then the handle goes right next to the. Yeah. 
+
+You
+And what goes right next to the photo, like that? 
+
+Isabella Iovino
+Yeah. 
+
+You
+And 
+
+Isabella Iovino
+Yeah. 
+
+You
+you still want it on this side or just? Okay. 
+
+Isabella Iovino
+Uh, I think I like the left. And then maybe in between the, oh, what just happened? 
+
+You
+Ah, 
+
+Isabella Iovino
+Studying 
+
+You
+ah. Ah. 
+
+Isabella Iovino
+visas? Crypto stock, whatever 
+
+You
+It. 
+
+Isabella Iovino
+that was. 
+
+You
+Ah. Mom. 
+
+Isabella Iovino
+Who's laughing at you? Was that Mog 
+
+You
+Yeah. 
+
+Isabella Iovino
+Coin? Jesus. 
+
+You
+Come on. Okay, I don't know what that sound is. 
+
+Isabella Iovino
+How do you wait, how do you how do you make it go back to the square? 
+
+You
+I was trying to undo. 
+
+Isabella Iovino
+Okay. 
+
+You
+Yeah, that's 
+
+Isabella Iovino
+Oh, 
+
+You
+that's 
+
+Isabella Iovino
+okay. 
+
+You
+why I got screwed 
+
+Isabella Iovino
+All right, so 
+
+You
+up. 
+
+Isabella Iovino
+the handle can go there and then I don't know if I want to show follower count. 
+
+You
+Hmm. 
+
+Isabella Iovino
+Maybe like show. Okay, maybe instead of having the follower count, because like, so nobody's focusing on like how many followers someone has, 
+
+You
+Yeah. 
+
+Isabella Iovino
+just put like followers so that people can like see who the other person's following to see if you have mutuals, you know? 
+
+You
+Okay. 
+
+Isabella Iovino
+Instead of showing the number, just put followers and following. 
+
+You
+Okay, followers. And following. Oh, so it's like just a button, just 2 buttons. 
+
+Isabella Iovino
+Yeah. 
+
+You
+Okay, um. It's just, they're too big now, Bell. Following button. I 
+
+Isabella Iovino
+I mean, 
+
+You
+wonder, 
+
+Isabella Iovino
+you can 
+
+You
+I'm 
+
+Isabella Iovino
+adjust 
+
+You
+gonna 
+
+Isabella Iovino
+the 
+
+You
+do... 
+
+Isabella Iovino
+size of it, 
+
+You
+Yeah. 
+
+Isabella Iovino
+like. Through the actual 
+
+You
+Yeah, 
+
+Isabella Iovino
+thing. 
+
+You
+I'm trying to figure that out now. Uh. Small. followers button. It's gonna be too... I gotta like make the uh, the whole thing a little bit bigger here. 
+
+Isabella Iovino
+Maybe maybe don't even do the name of app, maybe. I don't know. What do you think? 
+
+You
+That's fine. It's like branding. Like, it's just like, 
+
+Isabella Iovino
+Yeah, that's 
+
+You
+uh, 
+
+Isabella Iovino
+true. 
+
+You
+I don't know. I 
+
+Isabella Iovino
+Wait, 
+
+You
+mean, 
+
+Isabella Iovino
+let 
+
+You
+I've 
+
+Isabella Iovino
+me look 
+
+You
+done that. 
+
+Isabella Iovino
+at 
+
+You
+They 
+
+Isabella Iovino
+Instagram. 
+
+You
+don't have that, but uh, it's fine. 
+
+Isabella Iovino
+They have it like, oh, okay, so the center at the top is actually the handle, and then the name is like right next to the photo. 
+
+You
+Um... Following button. It's just kind of annoying to do. All right, I'm just going to take that button here. Too big. I know what it is. Um, Actually, just do that. Following. That's pretty, that's, uh... 
+
+Isabella Iovino
+I think it looks okay, but I want I want it closer to the top. 
+
+You
+Okay. 
+
+Isabella Iovino
+Like, because I want, I want the bio to be as little space as possible. Or maybe maybe that gap could have like a little bio. Like somebody could write something 
+
+You
+Like 
+
+Isabella Iovino
+or should it go underneath the photo? 
+
+You
+here? No, 
+
+Isabella Iovino
+Yeah. 
+
+You
+it's 
+
+Isabella Iovino
+Or 
+
+You
+probably, 
+
+Isabella Iovino
+should it 
+
+You
+I 
+
+Isabella Iovino
+go? Yeah. 
+
+You
+think it's, I mean, that's kind of what I don't know. You also have to, like, realize that you can't be like completely different from Instagram, 
+
+Isabella Iovino
+Yeah, 
+
+You
+because 
+
+Isabella Iovino
+you're right. You're right. 
+
+You
+I 
+
+Isabella Iovino
+Yeah. 
+
+You
+don't know. It's the feeling thing. 
+
+Isabella Iovino
+I think the 
+
+You
+People are used 
+
+Isabella Iovino
+handle. 
+
+You
+to certain things. 
+
+Isabella Iovino
+Yeah, I think the handle should actually go above the followers I'm following. 
+
+You
+Okay. So don't 
+
+Isabella Iovino
+So like flip 
+
+You
+do this. 
+
+Isabella Iovino
+them. 
+
+You
+And you kind of just 
+
+Isabella Iovino
+Now 
+
+You
+like, 
+
+Isabella Iovino
+there's too 
+
+You
+Like 
+
+Isabella Iovino
+much of a gap. 
+
+You
+this. Or 
+
+Isabella Iovino
+Mm. 
+
+You
+like. 
+
+Isabella Iovino
+No, move it 
+
+You
+Like 
+
+Isabella Iovino
+up. 
+
+You
+this. 
+
+Isabella Iovino
+Oh, okay, okay. Move the handle up like that, and then the bio could go right underneath followers and following, 
+
+You
+Okay, 
+
+Isabella Iovino
+like someone could write something if they want. 
+
+You
+so we'll do. Like that. And. 
+
+Isabella Iovino
+And then maybe above the picture could be like, however, whatever they want to put as their name. 
+
+You
+Above the picture. What is their 
+
+Isabella Iovino
+Yeah. 
+
+You
+name? Oh. 
+
+Isabella Iovino
+Like, so you know how like you can put your name in Instagram, but like they're handled separate from 
+
+You
+Yeah. 
+
+Isabella Iovino
+that? Yeah, so maybe like the name could go above. Or should it go right next to the handle where that gap is? 
+
+You
+Um... Let's see, uh, They have the handle. Okay, so the handle is at the top, Instagram, and then they have the name. Like, ends with the, like, data next to the image, um, Bio handle. Should you just do this? Oh shit. How do I lock this? I lock that one. Okay. She, you want to just do this? 
+
+Isabella Iovino
+But that's like exactly like 
+
+You
+I 
+
+Isabella Iovino
+Instagram, isn't it? 
+
+You
+know. I know. 
+
+Isabella Iovino
+So, 
+
+You
+All 
+
+Isabella Iovino
+I don't know. I'm trying 
+
+You
+right. 
+
+Isabella Iovino
+to keep 
+
+You
+Okay. 
+
+Isabella Iovino
+like the that part of the profile as little as possible because one thing that I find kind of annoying about Instagram is how big that part is because I like to see the photos more than 
+
+You
+What 
+
+Isabella Iovino
+the 
+
+You
+if we, what 
+
+Isabella Iovino
+actual. 
+
+You
+if we did that? 
+
+Isabella Iovino
+Mm. Ooh, what if followers is on the left of name of app and following on the right? 
+
+You
+You could do 
+
+Isabella Iovino
+That 
+
+You
+that. 
+
+Isabella Iovino
+might look 
+
+You
+It 
+
+Isabella Iovino
+weird. 
+
+You
+could do this too, like um, up here in the top right or something. 
+
+Isabella Iovino
+Yeah. 
+
+You
+I think this could be a separate section, though. Like, you don't have to put this, like, this is like your your, like, information. Um, 
+
+Isabella Iovino
+Yeah. And then maybe 
+
+You
+Yeah. 
+
+Isabella Iovino
+the name could go right underneath handle there. 
+
+You
+Could be name 1st or handle first. 
+
+Isabella Iovino
+Uh. Should, I don't know. Oh, what if, what if the handle is like in the profile photo, like at the bottom of it, 
+
+You
+Yeah, 
+
+Isabella Iovino
+or 
+
+You
+I could 
+
+Isabella Iovino
+the 
+
+You
+do that. 
+
+Isabella Iovino
+name? No, actually, I feel like the name would probably be cooler, because, like, people could customize it to whatever they want, you know? 
+
+You
+I 
+
+Isabella Iovino
+Actually, I don't 
+
+You
+mean, 
+
+Isabella Iovino
+know. 
+
+You
+they can do both. They can customize the handle in it. I mean, you know, I don't know why 
+
+Isabella Iovino
+That's 
+
+You
+you 
+
+Isabella Iovino
+true. 
+
+You
+have a handle in a name. I 
+
+Isabella Iovino
+Yeah. 
+
+You
+mean, you can just put your name in the bio. If you want to. All 
+
+Isabella Iovino
+No, I want to have the name section. 
+
+You
+right. 
+
+Isabella Iovino
+And then also maybe next to it, you could put pronouns. 
+
+You
+Right. Like, so here you'd have. Pronouns here. 
+
+Isabella Iovino
+Yeah. 
+
+You
+All right. Um. 
+
+Isabella Iovino
+And maybe the maybe the handle, it could be like longer, so it like, it's like not just awkwardly kind of there, you know, like that, yeah. 
+
+You
+Okay. 
+
+Isabella Iovino
+Okay. 
+
+You
+Um Um. All right. So, what does ad button do? Oh, that's what they have. Did anybody use that? There's 
+
+Isabella Iovino
+What? 
+
+You
+an ad button at the top left. Like 
+
+Isabella Iovino
+Add of top left of 
+
+You
+it 
+
+Isabella Iovino
+what? 
+
+You
+can go to the Instagram profile. 
+
+Isabella Iovino
+Oh, hold on, let me go. Oh, that that's to add a post. They keep, and one thing I don't want with this app is how I don't want to be changing things up super often, 
+
+You
+I 
+
+Isabella Iovino
+and 
+
+You
+know. 
+
+Isabella Iovino
+like every 
+
+You
+Oh. 
+
+Isabella Iovino
+month 
+
+You
+Yeah. 
+
+Isabella Iovino
+there's like a new thing going on. It's so stupid. 
+
+You
+You know what the thing is, they're reacting to user feedback. You know, 
+
+Isabella Iovino
+Yeah, 
+
+You
+like 
+
+Isabella Iovino
+but 
+
+You
+this, 
+
+Isabella Iovino
+like nobody 
+
+You
+you're, 
+
+Isabella Iovino
+asks for that. 
+
+You
+well, you have, you don't. I mean, they have data on it. Like, that's the thing. We don't have any data on our user base. So, like, 
+
+Isabella Iovino
+True. 
+
+You
+we are doing this based off of what we want, and that's good enough, honestly, because if we have, you know, if that basically means you're just finding a niche, and, uh, 
+
+Isabella Iovino
+Yeah. 
+
+You
+you know, you don't really need a whole lot. So 
+
+Isabella Iovino
+Yeah. 
+
+You
+you just get 10 paying users or something like that, you get like 250 bucks a month. You know, like, 
+
+Isabella Iovino
+Yeah. 
+
+You
+But we just got to figure out how to monetize later. Anyway, let's just keep going to this. 
+
+Isabella Iovino
+Okay. Um, how are we gonna do the, like, moving between your profile page and, like, your homepage 
+
+You
+Well, 
+
+Isabella Iovino
+and the search 
+
+You
+Let's, 
+
+Isabella Iovino
+page? 
+
+You
+uh, I don't know if you, you, I, what else are we putting on this one? Let's finish this one up. And 
+
+Isabella Iovino
+Okay, yeah. 
+
+You
+then, uh, move move 
+
+Isabella Iovino
+Um, 
+
+You
+on. 
+
+Isabella Iovino
+well, when it when it comes down to actually doing this stuff, I don't want like the boxes. I'm sure that's probably there just now 
+
+You
+Yeah, I know. 
+
+Isabella Iovino
+as 
+
+You
+It's 
+
+Isabella Iovino
+like, yeah, okay. 
+
+You
+a wire frame. It's just a 
+
+Isabella Iovino
+Yeah. 
+
+You
+layout of how you want things. And then yeah, we're going to style it 
+
+Isabella Iovino
+Shit, 
+
+You
+later. 
+
+Isabella Iovino
+where, where are we gonna put the follow button? 
+
+You
+Where is the follow button on the, I mean, the follow buttons are, okay, you have follow, you can have like a following section, like just a, and then you have this followers following and you can put a follow button here. 
+
+Isabella Iovino
+Well, but I don't I don't want all that kind of stuff to be taking up a lot of the profile. Like I said, I want most of it to be like you could see the person's 
+
+You
+Ah. 
+
+Isabella Iovino
+feed, like their posts. 
+
+You
+Okay, 
+
+Isabella Iovino
+So I feel 
+
+You
+so 
+
+Isabella Iovino
+like 
+
+You
+I 
+
+Isabella Iovino
+that's kind of taking up a 
+
+You
+have an 
+
+Isabella Iovino
+lot. 
+
+You
+idea. I have an idea then. Maybe we can just do um, we can make this float at the bottom. 
+
+Isabella Iovino
+Mm, nah, I kind of want it all in one place. I don't know. 
+
+You
+Okay. Um, let's see, uh, I mean, I can kind of move this up a bit more. Uh, make it reduce the size of the uh, oh, come on, I 
+
+Isabella Iovino
+Yeah. 
+
+You
+thought that was locked. It's supposed to be locked. That's annoying. Um, Okay, kind of move this up more. And then like, okay, we want some pictures, right? Like, how do we what kind of grid are we doing here? 
+
+Isabella Iovino
+Um... 
+
+You
+Like, 
+
+Isabella Iovino
+Hmm. 
+
+You
+is it, uh, like one or 
+
+Isabella Iovino
+Maybe like 
+
+You
+like 
+
+Isabella Iovino
+four? 
+
+You
+two, four? Okay. All 
+
+Isabella Iovino
+Uh. I feel like maybe stick to 3 like Instagram. 
+
+You
+right. I can freaking. 
+
+Isabella Iovino
+But don't make it rectangular. I hate it when they updated it to make it rectangular. I like I like to when it was square. 
+
+You
+Rectangular and square. I don't know what the difference is. Uh, 
+
+Isabella Iovino
+Okay, so go to 
+
+You
+Yeah. 
+
+Isabella Iovino
+Instagram and go to 
+
+You
+Okay, 
+
+Isabella Iovino
+like someone's profile. 
+
+You
+uh, let's see. Oh, okay, yeah, I see 
+
+Isabella Iovino
+So 
+
+You
+it's 
+
+Isabella Iovino
+you see 
+
+You
+like. 
+
+Isabella Iovino
+how the people post? it like a rectangle. You know how it used to be a lot smaller? 
+
+You
+Yeah, 
+
+Isabella Iovino
+It was like a square. 
+
+You
+yeah. 
+
+Isabella Iovino
+It was like 
+
+You
+Yeah. 
+
+Isabella Iovino
+a perfect square. I don't know 
+
+You
+All 
+
+Isabella Iovino
+why they changed it. don't like it. 
+
+You
+right, so let's make them perfect squares. I 
+
+Isabella Iovino
+Yep. 
+
+You
+don't even know if I can like. I don't know if I can get a perfect square with the software. Uh. Probably around that big. 
+
+Isabella Iovino
+Yeah. 
+
+You
+Oh, come on. And where do we start, like, right here? 
+
+Isabella Iovino
+Um, that's a little too high, I think. I think there needs to be like a little bit of a gap. 
+
+You
+Like, uh, And that's actually, that's, that's, it's got to be smaller than this, right? Because it's like, 
+
+Isabella Iovino
+Yeah. 
+
+You
+You want a 3rd of the screen. It's just probably 
+
+Isabella Iovino
+Yeah. 
+
+You
+like this much. Try this. 
+
+Isabella Iovino
+Wait hold I put my glasses. Oh, there we are. 
+
+You
+Pretty good. That's not bad. 
+
+Isabella Iovino
+Yeah. Okay, and then. 
+
+You
+Yeah. And it just could be, it's just gonna be endless. Like, you just keep scrolling. 
+
+Isabella Iovino
+Yeah. 
+
+You
+Uh. 
+
+Isabella Iovino
+Okay, well, you don't have to make another one. 
+
+You
+Oh, I was trying to like make it like, so okay, I guess not. All right. 
+
+Isabella Iovino
+Because I'm sure some stuff is probably going to go at the very bottom. 
+
+You
+Okay. Oh, so you want like a tab bar kind of thing? 
+
+Isabella Iovino
+Yeah, because you want to be able to like flip through like the search area and then like the 
+
+You
+Well, Instagram 
+
+Isabella Iovino
+homepage. 
+
+You
+has like just the back, uh, you can just swipe, uh, and like it has a back button at the left, uh, there's no tab bar, like unless you're on like the, The 
+
+Isabella Iovino
+No, there's a tab 
+
+You
+home, 
+
+Isabella Iovino
+bar. 
+
+You
+on the home, like if you're on like the home, How do I explain that? Like, okay, when you go into a profile, there's no tab bar. 
+
+Isabella Iovino
+Uh-huh. Uh hold on. Oh, yeah. Well, but when you're on your own profile, there is. 
+
+You
+Um, Oh, when you're on your own father is. Interesting. 
+
+Isabella Iovino
+Wait, hold on. 
+
+You
+Yeah, you're right. 
+
+Isabella Iovino
+Wait. Holy shit. Holy shit, wait, wait, wait, 
+
+You
+All 
+
+Isabella Iovino
+wait. 
+
+You
+right. 
+
+Isabella Iovino
+There might be the, there might be the ninth secret ninth episode of Stranger Things tomorrow. One of the actors in the show was just on the tonight show and said tomorrow it begins. 
+
+You
+Oh boy. 
+
+Isabella Iovino
+Holy shit. I swear to God, there better be a ninth episode. Holy shit. 
+
+You
+Um. All right, I'm going to pause, I'm going to stop recording. 

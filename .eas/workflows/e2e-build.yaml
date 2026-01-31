@@ -1,0 +1,122 @@
+name: E2E Build
+
+concurrency:
+  cancel_in_progress: true
+  group: ${{ workflow.filename }}-${{ github.ref }}
+
+# on:
+#   push:
+#     branches:
+#       - main
+
+jobs:
+  # Calculate fingerprint to check if native code changed
+  fingerprint:
+    name: Calculate Fingerprint
+    type: fingerprint
+    environment: preview
+
+  # # ===== Android =====
+
+  # # Try to find existing Android build with matching fingerprint
+  # android_get_build:
+  #   name: Check Android Fingerprint
+  #   needs: [fingerprint]
+  #   type: get-build
+  #   params:
+  #     fingerprint_hash: ${{ needs.fingerprint.outputs.android_fingerprint_hash }}
+  #     platform: android
+  #     profile: e2e-test
+  #     wait_for_in_progress: true
+  #   environment: preview
+
+  # # Repack Android with fresh JS if fingerprint matches
+  # android_repack:
+  #   name: Repack Android with Fresh JS
+  #   needs: [android_get_build]
+  #   if: ${{ needs.android_get_build.outputs.build_id }}
+  #   type: repack
+  #   params:
+  #     build_id: ${{ needs.android_get_build.outputs.build_id }}
+  #     embed_bundle_assets: true
+
+  # # Build Android only if fingerprint differs
+  # android_build:
+  #   name: Build Android for E2E
+  #   needs: [android_get_build]
+  #   if: ${{ !needs.android_get_build.outputs.build_id }}
+  #   type: build
+  #   params:
+  #     platform: android
+  #     profile: e2e-test
+  #   environment: preview
+
+  # ===== iOS =====
+
+  # Try to find existing iOS build with matching fingerprint
+  ios_get_build:
+    name: Check iOS Fingerprint
+    needs: [fingerprint]
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint.outputs.ios_fingerprint_hash }}
+      platform: ios
+      profile: e2e-test
+      wait_for_in_progress: true
+    environment: preview
+
+  # Repack iOS with fresh JS if fingerprint matches
+  ios_repack:
+    name: Repack iOS with Fresh JS
+    needs: [ios_get_build]
+    if: ${{ needs.ios_get_build.outputs.build_id }}
+    type: repack
+    params:
+      build_id: ${{ needs.ios_get_build.outputs.build_id }}
+      embed_bundle_assets: true
+    environment: preview
+
+  # Build iOS only if fingerprint differs
+  ios_build:
+    name: Build iOS for E2E
+    needs: [ios_get_build]
+    if: ${{ !needs.ios_get_build.outputs.build_id }}
+    type: build
+    params:
+      platform: ios
+      profile: e2e-test
+    environment: preview
+
+  # ===== Notifications =====
+
+  # notify_slack_android:
+  #   name: Notify Slack - Android Build
+  #   needs: [android_repack, android_build]
+  #   if: ${{ env.SLACK_WEBHOOK_URL }}
+  #   type: slack
+  #   params:
+  #     channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+  #     webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+  #     message: |
+  #       🔨 Android e2e build ready!
+
+  #       *Commit*: ${{ github.event.head_commit.message }}
+  #       *Profile*: e2e-test
+  #       *Platform*: Android
+  #       📲 Install: https://expo.dev/accounts/${{ env.EXPO_ACCOUNT }}/projects/retro-insta/builds/${{ needs.android_repack.outputs.build_id || needs.android_build.outputs.build_id }}
+
+  notify_slack_ios:
+    name: Notify Slack - iOS Build
+    needs: [ios_repack, ios_build]
+    if: ${{ env.SLACK_WEBHOOK_URL }}
+    type: slack
+    params:
+      channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+      webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+      message: |
+        🔨 iOS e2e simulator build ready!
+
+        *Commit*: ${{ github.event.head_commit.message }}
+        *Profile*: e2e-test
+        *Platform*: iOS
+        📲 Install: https://expo.dev/accounts/${{ env.EXPO_ACCOUNT }}/projects/retro-insta/builds/${{ needs.ios_repack.outputs.build_id || needs.ios_build.outputs.build_id }}

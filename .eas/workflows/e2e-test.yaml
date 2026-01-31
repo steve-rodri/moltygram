@@ -1,0 +1,126 @@
+name: E2E Test
+
+concurrency:
+  cancel_in_progress: true
+  group: ${{ workflow.filename }}-${{ github.ref }}
+
+jobs:
+  # Calculate fingerprint to find matching build
+  fingerprint:
+    name: Calculate Fingerprint
+    type: fingerprint
+    environment: preview
+
+  # ===== iOS =====
+
+  # Find existing iOS build with matching fingerprint
+  ios_get_build:
+    name: Find iOS Build
+    needs: [fingerprint]
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint.outputs.ios_fingerprint_hash }}
+      platform: ios
+      profile: e2e-test
+      wait_for_in_progress: true
+    environment: preview
+
+  # Repack iOS build with fresh JS bundle
+  ios_repack:
+    name: Repack iOS with Fresh JS
+    needs: [ios_get_build]
+    if: ${{ needs.ios_get_build.outputs.build_id }}
+    type: repack
+    params:
+      build_id: ${{ needs.ios_get_build.outputs.build_id }}
+      embed_bundle_assets: true
+    environment: preview
+
+  # Full iOS build if no matching fingerprint found
+  ios_build:
+    name: Build iOS for E2E
+    needs: [ios_get_build]
+    if: ${{ !needs.ios_get_build.outputs.build_id }}
+    type: build
+    params:
+      platform: ios
+      profile: e2e-test
+    environment: preview
+
+  # Run Maestro tests on iOS
+  ios_e2e:
+    name: Run E2E Tests (iOS)
+    needs: [ios_repack, ios_build]
+    type: maestro
+    params:
+      build_id: ${{ needs.ios_repack.outputs.build_id || needs.ios_build.outputs.build_id }}
+      flow_path: .maestro/flows/
+    environment: preview
+
+  # # ===== Android =====
+
+  # # Find existing Android build with matching fingerprint
+  # android_get_build:
+  #   name: Find Android Build
+  #   needs: [fingerprint]
+  #   type: get-build
+  #   params:
+  #     fingerprint_hash: ${{ needs.fingerprint.outputs.android_fingerprint_hash }}
+  #     platform: android
+  #     profile: e2e-test
+  #     wait_for_in_progress: true
+  #   environment: preview
+
+  # # Repack Android build with fresh JS bundle
+  # android_repack:
+  #   name: Repack Android with Fresh JS
+  #   needs: [android_get_build]
+  #   if: ${{ needs.android_get_build.outputs.build_id }}
+  #   type: repack
+  #   params:
+  #     build_id: ${{ needs.android_get_build.outputs.build_id }}
+  #     embed_bundle_assets: true
+
+  # # Full Android build if no matching fingerprint found
+  # android_build:
+  #   name: Build Android for E2E
+  #   needs: [android_get_build]
+  #   if: ${{ !needs.android_get_build.outputs.build_id }}
+  #   type: build
+  #   params:
+  #     platform: android
+  #     profile: e2e-test
+  #   environment: preview
+
+  # # Run Maestro tests on Android
+  # android_e2e:
+  #   name: Run E2E Tests (Android)
+  #   needs: [android_repack, android_build]
+  #   type: maestro
+  #   params:
+  #     build_id: ${{ needs.android_repack.outputs.build_id || needs.android_build.outputs.build_id }}
+  #     flow_path: .maestro/flows/
+
+  # ===== Notifications =====
+
+  notify_slack_ios:
+    name: Notify Slack - iOS Tests Passed
+    needs: [ios_e2e]
+    if: ${{ env.SLACK_WEBHOOK_URL }}
+    type: slack
+    params:
+      channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+      webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+      message: |
+        ✅ iOS E2E Tests Passed!
+
+  # notify_slack_android:
+  #   name: Notify Slack - Android Tests Passed
+  #   needs: [android_e2e]
+  #   if: ${{ env.SLACK_WEBHOOK_URL }}
+  #   type: slack
+  #   params:
+  #     channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+  #     webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+  #     message: |
+  #       ✅ Android E2E Tests Passed!

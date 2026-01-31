@@ -1,0 +1,184 @@
+name: Production Deploy
+
+concurrency:
+  cancel_in_progress: true
+  group: ${{ workflow.filename }}-${{ github.ref }}
+
+jobs:
+  fingerprint:
+    name: Calculate Fingerprint
+    type: fingerprint
+    environment: production
+
+  # android_get_build:
+  #   name: Find Android Build
+  #   needs: [fingerprint]
+  #   type: get-build
+  #   params:
+  #     fingerprint_hash: ${{ needs.fingerprint.outputs.android_fingerprint_hash }}
+  #     platform: android
+  #     profile: prd
+  #   environment: production
+
+  # android_update:
+  #   name: Publish Android Update to Production
+  #   needs: [android_get_build]
+  #   if: ${{ needs.android_get_build.outputs.build_id }}
+  #   type: update
+  #   params:
+  #     platform: android
+  #     channel: prd
+  #     message: ${{ github.event.head_commit.message }}
+  #   environment: production
+
+  # android_build:
+  #   name: Build Android
+  #   needs: [android_get_build]
+  #   if: ${{ !needs.android_get_build.outputs.build_id }}
+  #   type: build
+  #   params:
+  #     platform: android
+  #     profile: prd
+  #   environment: production
+
+  # android_submit:
+  #   name: Submit Android to Google Play
+  #   needs: [android_build]
+  #   if: ${{ needs.android_build.outputs.build_id }}
+  #   type: submit
+  #   params:
+  #     build_id: ${{ needs.android_build.outputs.build_id }}
+  #     profile: prd
+
+  ios_get_build:
+    name: Find iOS Build
+    needs: [fingerprint]
+    type: get-build
+    params:
+      fingerprint_hash: ${{ needs.fingerprint.outputs.ios_fingerprint_hash }}
+      platform: ios
+      profile: prd
+    environment: production
+
+  ios_update:
+    name: Publish iOS Update to Production
+    needs: [ios_get_build]
+    if: ${{ needs.ios_get_build.outputs.build_id }}
+    type: update
+    params:
+      platform: ios
+      channel: prd
+      message: ${{ github.event.head_commit.message }}
+    environment: production
+
+  ios_build:
+    name: Build iOS
+    needs: [ios_get_build]
+    if: ${{ !needs.ios_get_build.outputs.build_id }}
+    type: build
+    params:
+      platform: ios
+      profile: prd
+    environment: production
+
+  ios_submit:
+    name: Submit iOS to App Store
+    needs: [ios_build]
+    if: ${{ needs.ios_build.outputs.build_id }}
+    type: submit
+    params:
+      build_id: ${{ needs.ios_build.outputs.build_id }}
+      profile: prd
+    environment: production
+
+  # notify_slack_android_update:
+  #   name: Notify Slack - Android Update
+  #   needs: [android_update]
+  #   if: ${{ env.SLACK_WEBHOOK_URL }}
+  #   type: slack
+  #   params:
+  #     channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+  #     webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+  #     message: |
+  #       📦 Android update published to Production!
+
+  #       *Commit*: ${{ github.event.head_commit.message }}
+  #       *Channel*: prd
+  #       *Platform*: Android
+
+  notify_slack_ios_update:
+    name: Notify Slack - iOS Update
+    needs: [ios_update]
+    if: ${{ env.SLACK_WEBHOOK_URL }}
+    type: slack
+    params:
+      channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+      webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+      message: |
+        📦 iOS update published to Production!
+
+        *Commit*: ${{ github.event.head_commit.message }}
+        *Channel*: prd
+        *Platform*: iOS
+
+  # notify_slack_android_build:
+  #   name: Notify Slack - Android Build
+  #   needs: [android_build]
+  #   if: ${{ env.SLACK_WEBHOOK_URL }}
+  #   type: slack
+  #   params:
+  #     channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+  #     webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+  #     message: |
+  #       🔨 Android build created for Production!
+
+  #       *Commit*: ${{ github.event.head_commit.message }}
+  #       *Channel*: prd
+  #       *Platform*: Android
+  #       📲 Build: https://expo.dev/accounts/${{ env.EXPO_ACCOUNT }}/projects/retro-insta/builds/${{ needs.android_build.outputs.build_id }}
+
+  notify_slack_ios_build:
+    name: Notify Slack - iOS Build
+    needs: [ios_build]
+    if: ${{ env.SLACK_WEBHOOK_URL }}
+    type: slack
+    params:
+      channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+      webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+      message: |
+        🔨 iOS build created for Production!
+
+        *Commit*: ${{ github.event.head_commit.message }}
+        *Channel*: prd
+        *Platform*: iOS
+        📲 Build: https://expo.dev/accounts/${{ env.EXPO_ACCOUNT }}/projects/retro-insta/builds/${{ needs.ios_build.outputs.build_id }}
+
+  # notify_slack_android_submit:
+  #   name: Notify Slack - Android Submit
+  #   needs: [android_submit]
+  #   if: ${{ env.SLACK_WEBHOOK_URL }}
+  #   type: slack
+  #   params:
+  #     channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+  #     webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+  #     message: |
+  #       🎉 Android submitted to Google Play!
+
+  #       *Commit*: ${{ github.event.head_commit.message }}
+  #       *Channel*: prd
+  #       *Platform*: Android
+
+  notify_slack_ios_submit:
+    name: Notify Slack - iOS Submit
+    needs: [ios_submit]
+    if: ${{ env.SLACK_WEBHOOK_URL }}
+    type: slack
+    params:
+      channel: ${{ env.SLACK_CHANNEL || 'retro-insta-builds' }}
+      webhook_url: ${{ env.SLACK_WEBHOOK_URL }}
+      message: |
+        🎉 iOS submitted to App Store!
+
+        *Commit*: ${{ github.event.head_commit.message }}
+        *Channel*: prd
+        *Platform*: iOS

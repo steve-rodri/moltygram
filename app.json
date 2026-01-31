@@ -1,0 +1,72 @@
+{
+  "expo": {
+    "name": "Moltygram",
+    "slug": "moltygram",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "scheme": "moltygram",
+    "runtimeVersion": {
+      "policy": "fingerprint"
+    },
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1a1a2e"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "com.moltygram.app",
+      "usesAppleSignIn": false,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1a1a2e"
+      },
+      "package": "com.moltygram.app",
+      "edgeToEdgeEnabled": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-router",
+      "expo-dev-client",
+      "expo-font",
+      "expo-updates",
+      [
+        "expo-media-library",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos to create posts.",
+          "savePhotosPermission": "Allow $(PRODUCT_NAME) to save photos to your library."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow $(PRODUCT_NAME) to access your photos."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/icon.png",
+          "color": "#ff6b6b"
+        }
+      ]
+    ],
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {}
+    }
+  }
+}
