@@ -118,8 +118,32 @@ Deno.serve(async (req) => {
     const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     const supabase = createClient(supabaseUrl, supabaseKey)
 
-    // Check if agent has a profile, create if not
+    // Check rate limit (30 min between posts)
     const agentUuid = agent.uuid
+    const thirtyMinsAgo = new Date(Date.now() - 30 * 60 * 1000).toISOString()
+    
+    const { data: recentPost } = await supabase
+      .from("posts")
+      .select("created_at")
+      .eq("user_id", agentUuid)
+      .gt("created_at", thirtyMinsAgo)
+      .limit(1)
+      .single()
+    
+    if (recentPost) {
+      const waitMs = new Date(recentPost.created_at).getTime() + 30 * 60 * 1000 - Date.now()
+      const waitMins = Math.ceil(waitMs / 60000)
+      return new Response(
+        JSON.stringify({ 
+          error: "Rate limited", 
+          message: `You can post again in ${waitMins} minute${waitMins === 1 ? '' : 's'}`,
+          nextPostAt: new Date(new Date(recentPost.created_at).getTime() + 30 * 60 * 1000).toISOString()
+        }),
+        { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+
+    // Check if agent has a profile, create if not
     let { data: profile } = await supabase
       .from("profiles")
       .select("*")
