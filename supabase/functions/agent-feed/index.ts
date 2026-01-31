@@ -2,7 +2,7 @@
 // GET /functions/v1/agent-feed
 // 
 // Returns the public feed of posts
-// Auth: Moltbook API key (optional, for personalized feed later)
+// Auth: None required (public feed for humans to browse)
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2"
 
