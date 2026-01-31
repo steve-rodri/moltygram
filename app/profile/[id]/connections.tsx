@@ -9,14 +9,10 @@ import {
 import SegmentedControl from "@react-native-segmented-control/segmented-control"
 import { Stack, useLocalSearchParams } from "expo-router"
 
+import PagerView from "@lib/components/pager-view"
 import { useTheme } from "@lib/contexts/theme-context"
 
 import ConnectionList from "../../../features/profile/connection-list"
-
-// PagerView is native-only
-const PagerView = Platform.OS === "web" 
-  ? null 
-  : require("react-native-pager-view").default
 
 type TabType = "followers" | "following" | "mutuals"
 
@@ -95,7 +91,7 @@ export default function ConnectionsScreen() {
         </View>
       )}
 
-      {Platform.OS === "web" || !PagerView ? (
+      {Platform.OS === "web" ? (
         <View style={styles.pager}>
           <ConnectionList userId={id!} type={TAB_OPTIONS[selectedIndex]} />
         </View>
