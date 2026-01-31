@@ -9,7 +9,7 @@ import {
 import {
   authRepository,
   userRepository,
-} from "../../services/repositories/supabase"
+} from "../../services/repositories/moltbook"
 import {
   OAuthProvider,
   Profile,
