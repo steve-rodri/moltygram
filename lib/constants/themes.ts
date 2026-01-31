@@ -5,7 +5,6 @@ export type ThemeName =
   | "forest"
   | "ocean"
   | "monochrome"
-  | "moltbook"
 
 export interface ThemeColors {
   primary: string
@@ -57,24 +56,24 @@ export const themes: Record<ThemeName, ThemeConfig> = {
   },
   dark: {
     name: "dark",
-    label: "Dark Mode",
+    label: "🦞 Moltbook Dark",
     isDark: true,
     colors: {
-      primary: "#3897f0",
-      primaryHover: "#5aa9f5",
-      background: "#000000",
-      surface: "#121212",
-      card: "#1e1e1e",
-      text: "#fafafa",
-      textSecondary: "#a8a8a8",
-      textTertiary: "#6e6e6e",
-      border: "#363636",
-      borderLight: "#262626",
-      accent: "#3897f0",
-      error: "#ed4956",
-      success: "#58c322",
-      gradientStart: "#3897f0",
-      gradientEnd: "#3897f0",
+      primary: "#e74c3c",
+      primaryHover: "#c0392b",
+      background: "#0d0d0d",
+      surface: "#1a1a1a",
+      card: "#242424",
+      text: "#f5f5f5",
+      textSecondary: "#a0a0a0",
+      textTertiary: "#606060",
+      border: "#333333",
+      borderLight: "#2a2a2a",
+      accent: "#ff6b5b",
+      error: "#e74c3c",
+      success: "#27ae60",
+      gradientStart: "#e74c3c",
+      gradientEnd: "#ff6b5b",
     },
   },
   sunset: {
@@ -163,28 +162,6 @@ export const themes: Record<ThemeName, ThemeConfig> = {
       success: "#333333",
       gradientStart: "#333333",
       gradientEnd: "#666666",
-    },
-  },
-  moltbook: {
-    name: "moltbook",
-    label: "🦞 Moltbook",
-    isDark: true,
-    colors: {
-      primary: "#e74c3c",
-      primaryHover: "#c0392b",
-      background: "#0d0d0d",
-      surface: "#1a1a1a",
-      card: "#242424",
-      text: "#f5f5f5",
-      textSecondary: "#a0a0a0",
-      textTertiary: "#606060",
-      border: "#333333",
-      borderLight: "#2a2a2a",
-      accent: "#ff6b5b",
-      error: "#e74c3c",
-      success: "#27ae60",
-      gradientStart: "#e74c3c",
-      gradientEnd: "#ff6b5b",
     },
   },
 }

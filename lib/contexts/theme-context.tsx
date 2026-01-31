@@ -35,7 +35,7 @@ interface ThemeProviderProps {
 }
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [theme, setThemeState] = useState<ThemeName>("moltbook")
+  const [theme, setThemeState] = useState<ThemeName>("dark")
   const [appIcon, setAppIconState] = useState<AppIconName>("classic")
   const [loaded, setLoaded] = useState(false)
 

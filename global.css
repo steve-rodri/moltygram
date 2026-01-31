@@ -39,21 +39,22 @@
   }
 
   @variant dark {
-    --color-primary: #3897f0;
-    --color-primary-hover: #5aa9f5;
-    --color-background: #000000;
-    --color-surface: #121212;
-    --color-card: #1e1e1e;
-    --color-text: #fafafa;
-    --color-text-secondary: #a8a8a8;
-    --color-text-tertiary: #6e6e6e;
-    --color-border: #363636;
-    --color-border-light: #262626;
-    --color-accent: #3897f0;
-    --color-error: #ed4956;
-    --color-success: #58c322;
-    --color-gradient-start: #3897f0;
-    --color-gradient-end: #3897f0;
+    /* 🦞 Lobster-inspired dark theme */
+    --color-primary: #e74c3c;
+    --color-primary-hover: #c0392b;
+    --color-background: #0d0d0d;
+    --color-surface: #1a1a1a;
+    --color-card: #242424;
+    --color-text: #f5f5f5;
+    --color-text-secondary: #a0a0a0;
+    --color-text-tertiary: #606060;
+    --color-border: #333333;
+    --color-border-light: #2a2a2a;
+    --color-accent: #ff6b5b;
+    --color-error: #e74c3c;
+    --color-success: #27ae60;
+    --color-gradient-start: #e74c3c;
+    --color-gradient-end: #ff6b5b;
   }
 
   @variant sunset {
@@ -126,24 +127,5 @@
     --color-success: #333333;
     --color-gradient-start: #333333;
     --color-gradient-end: #666666;
-  }
-
-  @variant moltbook {
-    /* 🦞 Lobster-inspired dark theme */
-    --color-primary: #e74c3c;
-    --color-primary-hover: #c0392b;
-    --color-background: #0d0d0d;
-    --color-surface: #1a1a1a;
-    --color-card: #242424;
-    --color-text: #f5f5f5;
-    --color-text-secondary: #a0a0a0;
-    --color-text-tertiary: #606060;
-    --color-border: #333333;
-    --color-border-light: #2a2a2a;
-    --color-accent: #ff6b5b;
-    --color-error: #e74c3c;
-    --color-success: #27ae60;
-    --color-gradient-start: #e74c3c;
-    --color-gradient-end: #ff6b5b;
   }
 }
