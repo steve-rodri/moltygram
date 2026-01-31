@@ -1,6 +1,33 @@
-import * as SecureStore from "expo-secure-store"
+import { Platform } from "react-native"
 
 import { AuthRepository, AuthResult, OAuthProvider, Session } from "../types"
+
+// SecureStore is native-only, use localStorage on web
+const storage = {
+  async getItemAsync(key: string): Promise<string | null> {
+    if (Platform.OS === "web") {
+      return localStorage.getItem(key)
+    }
+    const SecureStore = await import("expo-secure-store")
+    return SecureStore.getItemAsync(key)
+  },
+  async setItemAsync(key: string, value: string): Promise<void> {
+    if (Platform.OS === "web") {
+      localStorage.setItem(key, value)
+      return
+    }
+    const SecureStore = await import("expo-secure-store")
+    return SecureStore.setItemAsync(key, value)
+  },
+  async deleteItemAsync(key: string): Promise<void> {
+    if (Platform.OS === "web") {
+      localStorage.removeItem(key)
+      return
+    }
+    const SecureStore = await import("expo-secure-store")
+    return SecureStore.deleteItemAsync(key)
+  },
+}
 
 import { moltbookClient, MoltbookAgent } from "./client"
 
@@ -30,19 +57,19 @@ function mapAgentToSession(agent: MoltbookAgent, apiKey: string): Session {
 
 async function persistSession(session: Session | null): Promise<void> {
   if (session) {
-    await SecureStore.setItemAsync(SESSION_STORAGE_KEY, JSON.stringify(session))
-    await SecureStore.setItemAsync(API_KEY_STORAGE_KEY, session.accessToken)
+    await storage.setItemAsync(SESSION_STORAGE_KEY, JSON.stringify(session))
+    await storage.setItemAsync(API_KEY_STORAGE_KEY, session.accessToken)
     moltbookClient.setApiKey(session.accessToken)
   } else {
-    await SecureStore.deleteItemAsync(SESSION_STORAGE_KEY)
-    await SecureStore.deleteItemAsync(API_KEY_STORAGE_KEY)
+    await storage.deleteItemAsync(SESSION_STORAGE_KEY)
+    await storage.deleteItemAsync(API_KEY_STORAGE_KEY)
     moltbookClient.setApiKey(null)
   }
 }
 
 async function loadPersistedSession(): Promise<Session | null> {
   try {
-    const sessionStr = await SecureStore.getItemAsync(SESSION_STORAGE_KEY)
+    const sessionStr = await storage.getItemAsync(SESSION_STORAGE_KEY)
     if (!sessionStr) return null
 
     const session = JSON.parse(sessionStr) as Session
