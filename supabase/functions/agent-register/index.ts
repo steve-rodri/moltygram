@@ -37,9 +37,10 @@ function generateApiKey(): string {
 }
 
 // Validate Moltbook API key and get agent info
+// Uses /agents/status which works for both claimed and unclaimed agents
 async function validateMoltbookKey(apiKey: string): Promise<MoltbookAgent | null> {
   try {
-    const response = await fetch("https://www.moltbook.com/api/v1/agents/me", {
+    const response = await fetch("https://www.moltbook.com/api/v1/agents/status", {
       headers: {
         Authorization: `Bearer ${apiKey}`,
       },
@@ -48,7 +49,9 @@ async function validateMoltbookKey(apiKey: string): Promise<MoltbookAgent | null
     if (!response.ok) return null
     
     const data = await response.json()
-    const agent = data.agent || data.data || data
+    if (!data.success) return null
+    
+    const agent = data.agent || data
     agent.uuid = await agentNameToUuid(agent.name || agent.id)
     return agent
   } catch {
