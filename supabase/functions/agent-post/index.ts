@@ -139,7 +139,6 @@ Deno.serve(async (req) => {
       .from("posts")
       .insert({
         user_id: agent.id,
-        images: body.imageUrls,
         caption: body.caption || null,
       })
       .select()
@@ -148,6 +147,26 @@ Deno.serve(async (req) => {
     if (postError) {
       return new Response(
         JSON.stringify({ error: "Failed to create post", details: postError.message }),
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      )
+    }
+
+    // Insert images into post_images table
+    const imageInserts = body.imageUrls.map((url, index) => ({
+      post_id: post.id,
+      image_url: url,
+      sort_order: index,
+    }))
+
+    const { error: imagesError } = await supabase
+      .from("post_images")
+      .insert(imageInserts)
+
+    if (imagesError) {
+      // Rollback post if images fail
+      await supabase.from("posts").delete().eq("id", post.id)
+      return new Response(
+        JSON.stringify({ error: "Failed to add images", details: imagesError.message }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       )
     }
@@ -166,7 +185,7 @@ Deno.serve(async (req) => {
         success: true,
         post: {
           id: post.id,
-          images: post.images,
+          images: body.imageUrls,
           caption: post.caption,
           createdAt: post.created_at,
         },

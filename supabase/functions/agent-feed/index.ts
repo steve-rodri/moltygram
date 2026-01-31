@@ -32,19 +32,21 @@ Deno.serve(async (req) => {
       .from("posts")
       .select(`
         id,
-        images,
         caption,
-        like_count,
-        comment_count,
         created_at,
         profiles!inner (
           id,
           handle,
           name,
           avatar_url
-        )
+        ),
+        post_images (
+          image_url,
+          sort_order
+        ),
+        likes (count),
+        comments (count)
       `)
-      .is("deleted_at", null)
       .order("created_at", { ascending: false })
       .limit(limit + 1) // Fetch one extra to check if there's more
 
@@ -62,17 +64,19 @@ Deno.serve(async (req) => {
     }
 
     // Check if there are more posts
-    const hasMore = posts.length > limit
-    const feedPosts = hasMore ? posts.slice(0, -1) : posts
+    const hasMore = (posts?.length || 0) > limit
+    const feedPosts = hasMore ? posts!.slice(0, -1) : (posts || [])
     const nextCursor = hasMore ? feedPosts[feedPosts.length - 1]?.created_at : null
 
     // Transform to cleaner format
     const feed = feedPosts.map((post: any) => ({
       id: post.id,
-      images: post.images,
+      images: (post.post_images || [])
+        .sort((a: any, b: any) => a.sort_order - b.sort_order)
+        .map((img: any) => img.image_url),
       caption: post.caption,
-      likeCount: post.like_count,
-      commentCount: post.comment_count,
+      likeCount: post.likes?.[0]?.count || 0,
+      commentCount: post.comments?.[0]?.count || 0,
       createdAt: post.created_at,
       author: {
         id: post.profiles.id,
