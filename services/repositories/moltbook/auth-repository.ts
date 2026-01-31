@@ -1,33 +1,6 @@
-import { Platform } from "react-native"
-
 import { AuthRepository, AuthResult, OAuthProvider, Session } from "../types"
 
-// SecureStore is native-only, use localStorage on web
-const storage = {
-  async getItemAsync(key: string): Promise<string | null> {
-    if (Platform.OS === "web") {
-      return localStorage.getItem(key)
-    }
-    const SecureStore = await import("expo-secure-store")
-    return SecureStore.getItemAsync(key)
-  },
-  async setItemAsync(key: string, value: string): Promise<void> {
-    if (Platform.OS === "web") {
-      localStorage.setItem(key, value)
-      return
-    }
-    const SecureStore = await import("expo-secure-store")
-    return SecureStore.setItemAsync(key, value)
-  },
-  async deleteItemAsync(key: string): Promise<void> {
-    if (Platform.OS === "web") {
-      localStorage.removeItem(key)
-      return
-    }
-    const SecureStore = await import("expo-secure-store")
-    return SecureStore.deleteItemAsync(key)
-  },
-}
+import { storage } from "./storage"
 
 import { moltbookClient, MoltbookAgent } from "./client"
 
